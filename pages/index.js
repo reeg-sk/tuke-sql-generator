@@ -47,19 +47,34 @@ export default function Home() {
 
     for (let i = 0; i < generate; i++) {
       let values = [];
-      //let check = cols.includes("name-firstName" && cols.includes("name-lastName") && cols.includes("internet-email"));
+      let names = [];
       cols.map(col => {
         let spcol = col.type.split("-");
 
         let generated = faker.fake(`{{${spcol[0]}.${spcol[1]}}}`);
 
-        if(col.type == "datatype-boolean" || col.type == "datatype-number") {
+        if (col.type == "datatype-boolean" || col.type == "datatype-number") {
           // nothing
-        } else if(col.type.includes("date")) {
+        } else if (col.type.includes("date")) {
           generated = new Date(generated).toISOString();
         } else {
           generated = `'${generated}'`;
         }
+
+        if (col.type == "name-firstName") {
+          names[0] = generated;
+        } else if (col.type == "name-lastName") {
+          names[1] = generated;
+        }
+
+        if (names[0] && names[1]) {
+          if (col.type == "internet-email") {
+            names[0] = names[0].toLowerCase().replaceAll("'", "");
+            names[1] = names[1].toLowerCase().replaceAll("'", "");
+            generated = "'" + (names.join(".") + "@" + generated.split("@")[1]);
+          }
+        }
+
 
         values.push(generated);
       })
