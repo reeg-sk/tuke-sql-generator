@@ -55,6 +55,8 @@ export default function Home() {
 
         if(col.type == "datatype-boolean" || col.type == "datatype-number") {
           // nothing
+        } else if(col.type.includes("date")) {
+          generated = new Date(generated).toISOString();
         } else {
           generated = `'${generated}'`;
         }
@@ -154,13 +156,7 @@ export default function Home() {
                 generatedData.map((dat, idx) => (
                   <span key={idx}>
                     {"(\n"}
-                    {"\t" + dat.map(d => {
-                      try {
-                        return new Date(d).getTime() === new Date(d).getTime() && isNaN(Number(d)) ? `'${new Date(d).toISOString()}'` : d;
-                      } catch (e) {
-                        return d;
-                      }
-                    }).join(", \n\t")}
+                    {"\t" + dat.join(", \n\t")}
                     {`\n)${generatedData.length - 1 != idx ? "," : " "}\n`}
                   </span>
                 ))
