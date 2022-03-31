@@ -156,7 +156,7 @@ export default function Home() {
                     {"(\n"}
                     {"\t" + dat.map(d => {
                       try {
-                        return new Date(d).getTime() === new Date(d).getTime() && isNaN(d) ? `'${new Date(d).toISOString()}'` : d;
+                        return new Date(d).getTime() === new Date(d).getTime() && isNaN(Number(d)) && !d.contains("+") ? `'${new Date(d).toISOString()}'` : d;
                       } catch (e) {
                         return d;
                       }
