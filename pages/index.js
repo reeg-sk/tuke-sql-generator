@@ -6,7 +6,7 @@ import faker from 'faker'
 export default function Home() {
   const [tableName, setTableName] = useState("bananas");
   const [cols, setCols] = useState([]);
-  const [generate, setGenerate] = useState(50);
+  const [generate, setGenerate] = useState(20);
   const [generatedData, setGeneratedData] = useState([]);
   const [activeLocale, setActiveLocale] = useState("en");
 
