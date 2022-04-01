@@ -119,7 +119,7 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>SQL Blabla</title>
-        <meta name="description" content="Peepo will help you generating random sql data" />
+        <meta name="description" content="Peepo will help you generate random sql data" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -218,7 +218,7 @@ export default function Home() {
       </main>
       <small style={{
         fontSize: "8px"
-      }}>Made with love - ReeG | powered by faker</small>
+      }}>Made with love by ReeG | powered by faker</small>
     </div>
   )
 }
