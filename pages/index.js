@@ -11,6 +11,7 @@ export default function Home() {
   const [activeLocale, setActiveLocale] = useState("en");
 
   const options = [ // from faker readme - transformed to array
+    "fullname", // custom
     "address-zipCode", "address-zipCodeByState", "address-city", "address-cityPrefix", "address-citySuffix", "address-cityName", "address-streetName", "address-streetAddress", "address-streetSuffix", "address-streetPrefix", "address-secondaryAddress", "address-county", "address-country", "address-countryCode", "address-state", "address-stateAbbr", "address-latitude", "address-longitude", "address-direction", "address-cardinalDirection", "address-ordinalDirection", "address-nearbyGPSCoordinate", "address-timeZone",
     "animal-dog", "animal-cat", "animal-snake", "animal-bear", "animal-lion", "animal-cetacean", "animal-horse", "animal-bird", "animal-cow", "animal-fish", "animal-crocodilia", "animal-insect", "animal-rabbit", "animal-type",
     "commerce-color", "commerce-department", "commerce-productName", "commerce-price", "commerce-productAdjective", "commerce-productMaterial", "commerce-product", "commerce-productDescription",
@@ -42,6 +43,10 @@ export default function Home() {
     setCols(clone);
   }
 
+  const removeCol = (name) => {
+    setCols(cols.filter((value) => value.name !== name));
+  }
+
   const generateData = () => {
     let total = [];
 
@@ -51,7 +56,12 @@ export default function Home() {
       cols.map(col => {
         let spcol = col.type.split("-");
 
-        let generated = faker.fake(`{{${spcol[0]}.${spcol[1]}}}`);
+        let generated = '';
+        if (col.type == "fullname") {
+          generated = faker.fake(`{{name.firstName}} {{name.lastName}}`);
+        } else {
+          generated = faker.fake(`{{${spcol[0]}.${spcol[1]}}}`);
+        }
 
         if (col.type == "datatype-boolean" || col.type == "datatype-number") {
           // nothing
@@ -120,7 +130,10 @@ export default function Home() {
                   display: "flex",
                   flexDirection: "column"
                 }}>
-                  <label htmlFor={"col-" + idx}>Col name</label>
+                  <label htmlFor={"col-" + idx}>
+                    <span style={{ cursor: "pointer", color: "red" }} onClick={() => removeCol(col.name)}>X</span>
+                    {" "}Col name
+                  </label>
                   <input name={"col-" + idx} type="text" value={col.name} onChange={e => updateCol("name", e, idx)} />
 
                 </td>
