@@ -66,7 +66,7 @@ export default function Home() {
         if (col.type == "datatype-boolean" || col.type == "datatype-number") {
           // nothing
         } else if (col.type.includes("date")) {
-          generated = new Date(generated).toISOString();
+          generated = `'${new Date(generated).toISOString()}'`;
         } else {
           generated = `'${generated.replace("'", "''")}'`;
         }
