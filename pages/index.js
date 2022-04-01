@@ -11,7 +11,7 @@ export default function Home() {
   const [activeLocale, setActiveLocale] = useState("en");
 
   const options = [ // from faker readme - transformed to array
-    "fullname", // custom
+    "fullname", "null", "enum", // custom
     "address-zipCode", "address-zipCodeByState", "address-city", "address-cityPrefix", "address-citySuffix", "address-cityName", "address-streetName", "address-streetAddress", "address-streetSuffix", "address-streetPrefix", "address-secondaryAddress", "address-county", "address-country", "address-countryCode", "address-state", "address-stateAbbr", "address-latitude", "address-longitude", "address-direction", "address-cardinalDirection", "address-ordinalDirection", "address-nearbyGPSCoordinate", "address-timeZone",
     "animal-dog", "animal-cat", "animal-snake", "animal-bear", "animal-lion", "animal-cetacean", "animal-horse", "animal-bird", "animal-cow", "animal-fish", "animal-crocodilia", "animal-insect", "animal-rabbit", "animal-type",
     "commerce-color", "commerce-department", "commerce-productName", "commerce-price", "commerce-productAdjective", "commerce-productMaterial", "commerce-product", "commerce-productDescription",
@@ -65,7 +65,11 @@ export default function Home() {
         let spcol = col.type.split("-");
 
         let generated = '';
-        if (col.type == "fullname") {
+        if (col.type == "enum") {
+          generated = col.enums.split(",")[Math.floor(Math.random() * (col.enums.split(",")).length)];
+        } else if (col.type == "null") {
+          generated = "null";
+        } else if (col.type == "fullname") {
           generated = faker.fake(`{{name.firstName}} {{name.lastName}}`);
         } else if (col.type == "datatype-number") {
           generated = faker.datatype.number({
@@ -77,7 +81,7 @@ export default function Home() {
           generated = faker.fake(`{{${spcol[0]}.${spcol[1]}}}`);
         }
 
-        if (col.type == "datatype-boolean" || col.type == "datatype-number") {
+        if (col.type == "datatype-boolean" || col.type == "datatype-number" || col.type == "null") {
           // nothing
         } else if (col.type.includes("date")) {
           generated = `'${new Date(generated).toISOString()}'`;
@@ -164,6 +168,12 @@ export default function Home() {
                       <option key={idz} value={opt}>{opt}</option>
                     ))}
                   </select>
+                  {col.type == "enum" && (
+                    <div>
+                      <span style={{ fontSize: "11px" }}>separator: comma ,</span>
+                      <input style={{ width: "100%" }} type={"text"} placeholder="one,two,three" onChange={e => updateCol("enums", e, idx)} />
+                    </div>
+                  )}
                   {col.type == "datatype-number" && (
                     <div>
                       <input style={{ width: "100%" }} type={"number"} placeholder="min val" onChange={e => updateCol("minValue", e, idx)} />
