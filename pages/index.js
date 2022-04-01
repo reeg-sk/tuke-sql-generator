@@ -59,6 +59,12 @@ export default function Home() {
         let generated = '';
         if (col.type == "fullname") {
           generated = faker.fake(`{{name.firstName}} {{name.lastName}}`);
+        } else if (col.type == "datatype-number") {
+          generated = faker.datatype.number({
+            min: Number(col.minValue),
+            max: Number(col.maxValue),
+          });
+
         } else {
           generated = faker.fake(`{{${spcol[0]}.${spcol[1]}}}`);
         }
@@ -75,7 +81,7 @@ export default function Home() {
           names[0] = generated;
         } else if (col.type == "name-lastName") {
           names[1] = generated;
-        } else if(col.type == "fullname") {
+        } else if (col.type == "fullname") {
           names = generated.split(" ");
         }
 
@@ -150,6 +156,12 @@ export default function Home() {
                       <option key={idz} value={opt}>{opt}</option>
                     ))}
                   </select>
+                  {col.type == "datatype-number" && (
+                    <div>
+                      <input style={{ width: "100%" }} type={"number"} placeholder="min val" onChange={e => updateCol("minValue", e, idx)} />
+                      <input style={{ width: "100%" }} type={"number"} placeholder="max val" onChange={e => updateCol("maxValue", e, idx)} />
+                    </div>
+                  )}
                 </td>
 
               </tr>
