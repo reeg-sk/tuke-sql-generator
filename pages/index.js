@@ -47,6 +47,14 @@ export default function Home() {
     setCols(cols.filter((value) => value.name !== name));
   }
 
+  const selectContents = (el) => {
+    let range = document.createRange();
+    range.selectNodeContents(el);
+    let sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
   const generateData = () => {
     let total = [];
 
@@ -193,14 +201,14 @@ export default function Home() {
 
         {cols.length > 0 && (
           <pre>
-            <code>
+            <code onClick={e => selectContents(e.target)}>
               INSERT INTO {tableName} ({cols.map(col => col.name).join(", ")}) VALUES{"\n"}
               {generatedData.length > 0 ?
                 generatedData.map((dat, idx) => (
                   <span key={idx}>
                     {"(\n"}
                     {"\t" + dat.join(", \n\t")}
-                    {`\n)${generatedData.length - 1 != idx ? "," : " "}\n`}
+                    {`\n)${generatedData.length - 1 != idx ? "," : ";"}\n`}
                   </span>
                 ))
                 : '(first generate data)'}
