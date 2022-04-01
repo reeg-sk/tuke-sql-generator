@@ -75,6 +75,8 @@ export default function Home() {
           names[0] = generated;
         } else if (col.type == "name-lastName") {
           names[1] = generated;
+        } else if(col.type == "fullname") {
+          names = generated.split(" ");
         }
 
         if (names[0] && names[1]) {
