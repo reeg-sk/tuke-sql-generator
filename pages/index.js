@@ -110,6 +110,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <img src="peepo.gif" width={64} />
         <h1>{"<3"} TUKE</h1>
         <header>
           <label htmlFor="tableName">Table name</label>
