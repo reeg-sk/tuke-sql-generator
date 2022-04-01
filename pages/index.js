@@ -68,7 +68,7 @@ export default function Home() {
         } else if (col.type.includes("date")) {
           generated = new Date(generated).toISOString();
         } else {
-          generated = `'${generated}'`;
+          generated = `'${generated.replace("'", "''")}'`;
         }
 
         if (col.type == "name-firstName") {
