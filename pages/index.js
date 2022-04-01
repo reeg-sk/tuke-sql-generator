@@ -61,8 +61,8 @@ export default function Home() {
           generated = faker.fake(`{{name.firstName}} {{name.lastName}}`);
         } else if (col.type == "datatype-number") {
           generated = faker.datatype.number({
-            min: Number(col.minValue),
-            max: Number(col.maxValue),
+            min: Number(col.minValue) || undefined,
+            max: Number(col.maxValue) || undefined,
           });
 
         } else {
