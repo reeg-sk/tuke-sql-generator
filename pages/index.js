@@ -75,6 +75,10 @@ export default function Home() {
             });
             break;
 
+          case "date-between":
+            generated = faker.date.between(col.minDate, col.maxDate);
+            break;
+
           default:
             generated = faker.fake(`{{${spcol[0]}.${spcol[1]}}}`);
             break;
@@ -83,7 +87,9 @@ export default function Home() {
         // Format values ``
         if (col.type == "datatype-boolean" || col.type == "datatype-number" || col.type == "null") {
           // nothing
-        } else if (col.type.includes("date")) {
+        } else if (
+          col.type.includes("date") && col.type != "date-month"
+        ) {
           generated = `'${new Date(generated).toISOString()}'`;
         } else {
           generated = `'${generated.replace("'", "''")}'`;
@@ -173,13 +179,19 @@ export default function Home() {
                   {col.type == "enum" && (
                     <div>
                       <span style={{ fontSize: "11px" }}>separator: comma ,</span>
-                      <input style={{ width: "100%" }} type={"text"} placeholder="one,two,three" onChange={e => updateCol("enums", e, idx)} />
+                      <input type={"text"} placeholder="one,two,three" onChange={e => updateCol("enums", e, idx)} />
                     </div>
                   )}
                   {col.type == "datatype-number" && (
                     <div>
-                      <input style={{ width: "100%" }} type={"number"} placeholder="min val" onChange={e => updateCol("minValue", e, idx)} />
-                      <input style={{ width: "100%" }} type={"number"} placeholder="max val" onChange={e => updateCol("maxValue", e, idx)} />
+                      <input type={"number"} placeholder="min val" onChange={e => updateCol("minValue", e, idx)} />
+                      <input type={"number"} placeholder="max val" onChange={e => updateCol("maxValue", e, idx)} />
+                    </div>
+                  )}
+                  {col.type == "date-between" && (
+                    <div>
+                      <input type={"date"} placeholder="min" onChange={e => updateCol("minDate", e, idx)} />
+                      <input type={"date"} placeholder="max" onChange={e => updateCol("maxDate", e, idx)} />
                     </div>
                   )}
                 </td>

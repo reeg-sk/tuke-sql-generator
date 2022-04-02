@@ -6,7 +6,7 @@ const options = [ // from faker readme - transformed to array
   "company-suffixes", "company-companyName", "company-companySuffix", "company-catchPhrase", "company-bs", "company-catchPhraseAdjective", "company-catchPhraseDescriptor", "company-catchPhraseNoun", "company-bsAdjective", "company-bsBuzz", "company-bsNoun",
   "database-column", "database-type", "database-collation", "database-engine",
   "datatype-number", "datatype-float", "datatype-datetime", "datatype-string", "datatype-uuid", "datatype-boolean", "datatype-hexaDecimal", "datatype-json", "datatype-array",
-  "date-past", "date-future", "date-between", "date-betweens", "date-recent", "date-soon", "date-month", "date-weekday",
+  "date-past", "date-future", "date-between", "date-recent", "date-soon", "date-month", //"date-weekday",
   "finance-account", "finance-accountName", "finance-routingNumber", "finance-mask", "finance-amount", "finance-transactionType", "finance-currencyCode", "finance-currencyName", "finance-currencySymbol", "finance-bitcoinAddress", "finance-litecoinAddress", "finance-creditCardNumber", "finance-creditCardCVV", "finance-ethereumAddress", "finance-iban", "finance-bic", "finance-transactionDescription",
   "git-branch", "git-commitEntry", "git-commitMessage", "git-commitSha", "git-shortSha",
   "hacker-abbreviation", "hacker-adjective", "hacker-noun", "hacker-verb", "hacker-ingverb", "hacker-phrase",
