@@ -127,18 +127,8 @@ export default function Home() {
   }, [activeLocale]);
 
   const handleKeyDown = (e) => {
-    console.log(e.code);
-    switch (e.code) {
-      case 'KeyG':
-        generateData();
-        break;
-
-      case 'Delete':
-        setCols([]);
-        break;
-
-      default:
-        break;
+    if (e.code == 'Delete') {
+      setCols([]);
     }
   }
 
