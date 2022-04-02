@@ -85,7 +85,7 @@ export default function Home() {
         }
 
         // Format values ``
-        if (col.type == "datatype-boolean" || col.type == "datatype-number" || col.type == "null") {
+        if (col.type == "datatype-boolean" || col.type == "datatype-number" || col.type == "datatype-float" || col.type == "null") {
           // nothing
         } else if (
           col.type.includes("date") && col.type != "date-month"
