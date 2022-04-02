@@ -126,6 +126,30 @@ export default function Home() {
     faker.locale = activeLocale;
   }, [activeLocale]);
 
+  const handleKeyDown = (e) => {
+    console.log(e.code);
+    switch (e.code) {
+      case 'KeyG':
+        generateData();
+        break;
+
+      case 'Delete':
+        setCols([]);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    }
+  }, []);
+
   return (
     <>
       <Head>
