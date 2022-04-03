@@ -92,7 +92,8 @@ export default function Home() {
         ) {
           generated = `'${new Date(generated).toISOString()}'`;
         } else {
-          generated = `'${generated.replace("'", "''")}'`;
+          if(!generated) generated = `''`;
+          else generated = `'${generated.replace("'", "''")}'`;
         }
 
         // Email  
@@ -159,7 +160,7 @@ export default function Home() {
         <hr />
 
         <div>
-          <button onClick={() => setCols([...cols, { name: faker.database.column() + Math.floor(Math.random() * 9), type: options[0], order: cols.length + 1 }])}>+ Add col</button>
+          <button onClick={() => setCols([...cols, { name: faker.database.column() + Math.floor(Math.random() * 9), type: options["custom"][0], order: cols.length + 1 }])}>+ Add col</button>
           <button onClick={() => setCols([])} className="button-secondary">Delete all cols</button>
         </div>
         <table>
@@ -186,8 +187,12 @@ export default function Home() {
                 <td>
                   <label htmlFor="type">Data type</label>
                   <select name="type" value={col.type} onChange={e => updateCol("type", e, idx)}>
-                    {options.map((opt, idz) => (
-                      <option key={idz} value={opt}>{opt}</option>
+                    {Object.keys(options).map((opt, idz) => (
+                      <optgroup label={opt} key={idz}>
+                        {options[opt].map((name, idy) => (
+                          <option key={idy} value={name}>{name}</option>
+                        ))}
+                      </optgroup>
                     ))}
                   </select>
                   {col.type == "enum" && (
