@@ -57,7 +57,7 @@ export default function Home() {
         let generated = '';
         switch (col.type) {
           case "enum":
-            generated = cols.enums && col.enums.split(",")[Math.floor(Math.random() * (col.enums.split(",")).length)] || 'yes';
+            generated = col.enums && col.enums.split(",")[Math.floor(Math.random() * (col.enums.split(",")).length)];
             break;
 
           case "null":
