@@ -68,8 +68,9 @@ export default function Home() {
             generated = faker.fake(`{{name.firstName}} {{name.lastName}}`);
             break;
 
+          case "datatype-float":
           case "datatype-number":
-            generated = faker.datatype.number({
+            generated = faker.datatype[`${spcol[1]}`]({
               min: Number(col.minValue) || undefined,
               max: Number(col.maxValue) || undefined,
             });
@@ -201,7 +202,7 @@ export default function Home() {
                       <input type={"text"} placeholder="one,two,three" onChange={e => updateCol("enums", e, idx)} />
                     </div>
                   )}
-                  {col.type == "datatype-number" && (
+                  {(col.type == "datatype-number" || col.type == "datatype-float") && (
                     <div>
                       <input type={"number"} placeholder="min val" onChange={e => updateCol("minValue", e, idx)} />
                       <input type={"number"} placeholder="max val" onChange={e => updateCol("maxValue", e, idx)} />
