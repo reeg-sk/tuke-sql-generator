@@ -5,7 +5,7 @@ const options = { // from faker readme - transformed to array
   commerce: ["commerce-color", "commerce-department", "commerce-productName", "commerce-price"],
   company: ["company-suffixes", "company-companyName", "company-companySuffix", "company-catchPhrase", "company-bs"],
   database: ["database-column", "database-type", "database-collation", "database-engine"],
-  datatype: ["datatype-number", "datatype-float", "datatype-datetime", "datatype-string", "datatype-uuid"],
+  datatype: ["datatype-number", "datatype-float", "datatype-datetime", "datatype-string", "datatype-uuid", "datatype-boolean"],
   date: ["date-past", "date-future", "date-between", "date-recent", "date-soon", "date-month"],
   finance: ["finance-account", "finance-accountName", "finance-routingNumber", "finance-mask", "finance-amount"],
   git: ["git-branch", "git-commitEntry", "git-commitMessage", "git-commitSha", "git-shortSha"],
