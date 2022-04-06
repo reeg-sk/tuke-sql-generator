@@ -191,7 +191,7 @@ export default function Home() {
                     {Object.keys(options).map((opt, idz) => (
                       <optgroup label={opt} key={idz}>
                         {options[opt].map((name, idy) => (
-                          <option key={idy} value={name}>{name}</option>
+                          <option key={idy} value={name}>{name.split("-")[1] || name}</option>
                         ))}
                       </optgroup>
                     ))}
